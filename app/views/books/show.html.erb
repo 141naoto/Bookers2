@@ -1,0 +1,46 @@
+<div class="body">
+	<% if flash[:notice] %>
+ <div class="flash">
+	<%= flash[:notice] %>
+ </div>
+     <% end %>
+ <div class="container">
+	<div class="row">
+		<div class="col-lg-3">
+ <%= render 'users/userinfo', user: @bookf.user %>
+
+ <%= render 'books/new', book: @book %>
+ </div>
+ <div class="col-lg-9">
+ <h2>Book detail</h2>
+    <table class="table table-striped">
+	  <tbody>
+	    <tr>
+			<td><%= attachment_image_tag @bookf.user, :profile_image, :fill, 46, 46, format:"jpg", fallback:"no_image.jpg" %>
+				<div class="username">
+				<%= link_to @bookf.user.username, user_path(current_user), class:"book_#{@bookf.id} link" %>
+			    </div>
+			</td>
+			<td><%= link_to @bookf.Title,book_path(@bookf), class:"book_#{@bookf.id} link" %>
+			</td>
+			<td><%= @bookf.Opinion %>
+			</td>
+
+			<% if @bookf.user.id == current_user.id %>
+
+			<td>
+            <%= link_to "Edit", edit_book_path(@bookf), class:"edit_book_#{@bookf.id} btn-sm btn-success top", :style=>:"hover:white;" %>
+           </td>
+
+           <td>
+			<%= link_to "Destroy", book_path(@bookf), method: :delete, data: { confirm: "本当にけしますか?"}, class:"destroy_book_#{@bookf.id} btn-sm btn-danger top", :style=>:"hover:white;" %>
+		   </td>
+		    <% end %>
+	   </tr>
+      </tbody>
+    </table>
+ </div>
+ </div>
+</div>
+
+

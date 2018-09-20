@@ -1,0 +1,42 @@
+<div class="body">
+
+<% if notice %>
+　　<p class="alert alert-notice"><%= notice %></p>
+<% end %>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3">
+<%= render 'users/userinfo', user: @user %>
+
+<%= render 'books/new', book: @book %>
+</div>
+<div class="col-lg-9">
+<h2>Books</h2>
+<table class="table table-hover table-inverse">
+	<thead>
+		<tr>
+			<th colspan="1"></th>
+			<th>Title</th>
+			<th>Opinion</th>
+		</tr>
+	</thead>
+
+	<% @books.each do |book| %>
+	<tbody>
+		<tr>
+			<td><%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: "jpg", fallback:"no_image.jpg", size:'50x50' %>
+			</td>
+
+			<td><%= link_to book.Title, book_path(book), class:"book_#{book.id} link" %>
+			</td>
+
+			<td><%= book.Opinion %>
+			</td>
+		</tr>
+	</tbody>
+	<% end %>
+</table>
+</div>
+</div>
+</div>
+</div>
